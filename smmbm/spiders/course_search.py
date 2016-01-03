@@ -52,10 +52,12 @@ class CourseSearchSpider(CrawlSpider):
             yield course
 
     def __clear_rate(self, css_classes):
+        ''' Return clear rate from list of css class '''
         s = ''.join([ x for x in map(self.__parse_typography, css_classes) if x is not None])
         return float(s)
 
     def __parse_typography(self, c):
+        ''' Parse number from css class like "typography-[0-9]" '''
         m = self.typography_regexp.match(c)
         if m is None:
             return None
@@ -65,6 +67,7 @@ class CourseSearchSpider(CrawlSpider):
         return num
 
     def __typography2int(self, css_class):
+        ''' Parse number and return it as int '''
         s = self.__parse_typography(css_class)
         if s is None:
             return None
