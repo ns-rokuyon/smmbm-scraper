@@ -5,13 +5,16 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 from scrapy.pipelines.images import ImagesPipeline
+from datetime import datetime
+import os
 
 class SmmbmImagesPipeline(ImagesPipeline):
     SUB_DIRECTORY = ''
 
     def file_path(self, request, response=None, info=None):
         path = super(SmmbmImagesPipeline, self).file_path(request, response, info)
-        return path.replace('full', 'full/%s' % self.SUB_DIRECTORY, 1)
+        directory = os.path.join('full', datetime.now().strftime('%Y/%m/%d'), self.SUB_DIRECTORY)
+        return path.replace('full', directory, 1)
 
 
 class CourseImagesPipeline(SmmbmImagesPipeline):
