@@ -74,6 +74,11 @@ ITEM_PIPELINES = {
 
 IMAGES_STORE = '/tmp'       # TODO
 
+MONGODB_SERVER = 'localhost'
+MONGODB_DB = 'smmbm'
+MONGODB_COLLECTION = 'courses'
+MONGODB_PORT = 27017
+
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 # NOTE: AutoThrottle will honour the standard settings for concurrency and delay
@@ -92,3 +97,6 @@ IMAGES_STORE = '/tmp'       # TODO
 #HTTPCACHE_DIR='httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES=[]
 #HTTPCACHE_STORAGE='scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+REDIRECT_MAX_TIMES = 6
+RETRY_ENABLED = False

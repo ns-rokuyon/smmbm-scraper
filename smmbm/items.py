@@ -10,6 +10,7 @@ from scrapy import Item, Field
 
 class CourseItem(Item):
     title = Field()
+    course_id = Field()
     skin = Field()
     tag = Field()
     liked_count = Field()

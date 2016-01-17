@@ -43,8 +43,10 @@ class CourseSearchSpider(CrawlSpider):
             course['shared_count'] = self.__typography2int(
                     course_card.xpath('.//div[contains(@class,"shared-count")]/div[contains(@class,"typography")]/@class').extract()[0])
 
-            # Course title
+            # Course title and id
             course['title'] = course_card.xpath('.//div[@class="course-title"]/text()').extract()[0]
+            course['course_id'] = self.__courseref2id(
+                    course_card.xpath('.//a[@class="button course-detail link"]/@href').extract()[0])
 
             # Course tag
             course['tag'] = course_card.xpath('.//div[contains(@class,"course-tag")]/text()').extract()[0]
@@ -72,3 +74,7 @@ class CourseSearchSpider(CrawlSpider):
         if s is None:
             return None
         return int(s)
+
+    def __courseref2id(self, href):
+        ''' Convert href for course-datail page to course-id string '''
+        return href.replace('/courses/','')
